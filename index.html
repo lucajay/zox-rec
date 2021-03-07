@@ -13,11 +13,11 @@
       <div class="container__form container--signup">
         <form action="#" class="form" id="signupForm">
           <h2 class="form__title">Sign Up</h2>
-          <input type="text" name="username_signup" placeholder="Full Name" class="input" required />
-          <input type="email" name="userEmail_signup" placeholder="Email" class="input" required />
-          <span class="error emailError"></span>
+          <input type="text" name="name" placeholder="Full Name" class="input" required />
+          <input type="tel" name="mobile" placeholder="Mobile No" minlength="10" maxlength="10" class="input" required />
+          <span class="error phoneError"></span>
           <input type="password" name="pwd1" placeholder="Password" class="input" required />
-          <input type="password" name="pwd2" placeholder="Re-Password" class="input" required />
+          <input type="password" name="password" placeholder="Re-Password" class="input" required />
           <span class="error pwdError"></span>
           <button type="submit" class="btn" disabled>Sign Up</button>
         </form>
@@ -27,11 +27,15 @@
       <div class="container__form container--signin">
         <form action="#" class="form" id="signinForm">
           <h2 class="form__title">Sign In</h2>
-          <input type="email" name="userEmail_signin" placeholder="Email" class="input" required />
-          <span class="error emailError"></span>
+          <input type="tel" name="userPhone_signin" placeholder="Mobile No" minlength="10" maxlength="10" class="input" required />
+          <span class="error phoneError"></span>
           <input type="password" name="pwd" placeholder="Password" class="input" required />
           <a href="#" class="link">Forgot your password?</a>
           <button type="submit" class="btn" disabled>Sign In</button>
+          <br>
+          <small class="dev-msg">Use data in
+            <a href="./images/login_steps.jpeg" target="_blank" alt="login feature steps">this image</a>
+            to create LOGIN feature</small>
         </form>
       </div>
 

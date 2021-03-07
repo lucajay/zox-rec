@@ -1,5 +1,7 @@
 // @ts-check
 
+const API_SIGNUP = "https://zxrec.herokuapp.com/signup/signup";
+
 function init($) {
   const pool = [];
 
@@ -40,28 +42,42 @@ function init($) {
   const submitSignup = function(e) {
     e.preventDefault();
     const $form = $(this);
+    const $submitBtn = $form.find('[type=submit]');
+    $submitBtn.prop("disabled", true);
 
     $.ajax({
       type: "POST",
-      url: '',
+      url: API_SIGNUP,
       data: $form.serialize(),
       success: function(data) {
         handleSignupSuccess(data);
       },
-      error: function (_xhr, textStatus, errorThrown) {
-        handleSignupError();
+      error: function (xhr, textStatus, errorThrown) {
+        handleSignupError((xhr.responseJSON || {}).message);
         console.warn(`Failed to create new user with status code: ${textStatus} (${errorThrown})`);
       },
+      complete: function() {
+        $submitBtn.prop("disabled", false);
+      }
     });
 
     return false;
   }
 
   const handleSignupSuccess = data => {
-    console.log(data);
+    if (data && data.succes) {
+      const $signUpMsg = $("#singnUpMsg");
+      if (data.status === 200) {
+        $signUpMsg.text(data.message);
+      }
+    } else {
+      handleSignupError();
+    }
   };
-  const handleSignupError = () => {
-    console.log('Failed signup');
+  const handleSignupError = (msg = '') => {
+    const $signUpMsg = $("#singnUpMsg");
+    const _msg = msg || "Failed to create user";
+    $signUpMsg.text(_msg);
   };
 
   const uniquePush = (item = '', targetArr = []) => {
@@ -77,12 +93,11 @@ function init($) {
     }
   };
 
-  const isValidEmail = email => {
-    if (!email) {
+  const isValidPhone = mobileNum => {
+    if (!mobileNum) {
       return false;
     }
-    const pattern = new RegExp('^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$');
-    return pattern.test(email);
+    return /^[6-9]\d{9}$/g.test(mobileNum);
   };
 
   const handleValidation = (e, allItemsCount) => {
@@ -102,17 +117,16 @@ function init($) {
       }
     }
 
-    if (type === 'email') {
+    if (type === 'tel') {
       if (val === '') {
         removeFromArray(pool, name);
       } else {
-        const $emailError = $form.find(".emailError");
-
-        if (isValidEmail(val)) {
+        const $phoneError = $form.find(".phoneError");
+        if (isValidPhone(val)) {
           uniquePush(name, pool);
-          $emailError.text('');
+          $phoneError.text('');
         } else {
-          $emailError.text('Invalid email');
+          $phoneError.text('Invalid mobile number');
           removeFromArray(pool, name);
         }
       }
@@ -138,6 +152,8 @@ function init($) {
               $pwdError.text('');
               uniquePush(name, pool);
             }
+          } else {
+            uniquePush(name, pool);
           }
         } else {
           uniquePush(name, pool);

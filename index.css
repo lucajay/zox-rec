@@ -227,6 +227,20 @@ body {
   line-height: 1;
 }
 
+.dev-msg,
+.info-msg {
+  background-color: white;
+  padding: 0.5rem 0.3rem;
+}
+
+.info-msg {
+	margin-top: 1rem;
+}
+
+.info-msg:empty {
+	display: none;
+}
+
 /* Tablet */
 @media screen and (max-width: 1024px) {
   :root {
