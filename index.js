@@ -67,8 +67,10 @@ function init($) {
   const handleSignupSuccess = data => {
     if (data && data.succes) {
       const $signUpMsg = $("#singnUpMsg");
+      const $sigInBtn = $("#signIn");
       if (data.status === 200) {
         $signUpMsg.text(data.message);
+        $sigInBtn.removeClass("btn--hidden");
       }
     } else {
       handleSignupError();
