@@ -13,11 +13,13 @@
       <div class="container__form container--signup">
         <form action="#" class="form" id="signupForm">
           <h2 class="form__title">Sign Up</h2>
-          <input type="text" placeholder="Full Name" class="input" />
-          <input type="email" placeholder="Email" class="input" />
-          <input type="password" placeholder="Password" class="input" />
-          <input type="password" placeholder="Re-Password" class="input" />
-          <button type="submit" class="btn">Sign Up</button>
+          <input type="text" name="username_signup" placeholder="Full Name" class="input" required />
+          <input type="email" name="userEmail_signup" placeholder="Email" class="input" required />
+          <span class="error emailError"></span>
+          <input type="password" name="pwd1" placeholder="Password" class="input" required />
+          <input type="password" name="pwd2" placeholder="Re-Password" class="input" required />
+          <span class="error pwdError"></span>
+          <button type="submit" class="btn" disabled>Sign Up</button>
         </form>
       </div>
 
@@ -25,10 +27,11 @@
       <div class="container__form container--signin">
         <form action="#" class="form" id="signinForm">
           <h2 class="form__title">Sign In</h2>
-          <input type="email" placeholder="Email" class="input" />
-          <input type="password" placeholder="Password" class="input" />
+          <input type="email" name="userEmail_signin" placeholder="Email" class="input" required />
+          <span class="error emailError"></span>
+          <input type="password" name="pwd" placeholder="Password" class="input" required />
           <a href="#" class="link">Forgot your password?</a>
-          <button class="btn">Sign In</button>
+          <button type="submit" class="btn" disabled>Sign In</button>
         </form>
       </div>
 
@@ -36,12 +39,14 @@
       <div class="container__overlay">
         <div class="overlay">
           <div class="overlay__panel overlay--left">
-            <img class="logo" alt="company logo" src="http://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG" />
+            <img class="overlay__logo" alt="company logo" src="http://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG" />
             <button class="btn" id="signIn">Sign In</button>
+            <span id="singnUpMsg" class="info-msg"></span>
           </div>
           <div class="overlay__panel overlay--right">
-            <img class="logo" alt="company logo" src="http://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG" />
+            <img class="overlay__logo" alt="company logo" src="http://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG" />
             <button class="btn" id="signUp">Sign Up</button>
+            <span id="signInMsg" class="info-msg"></span>
           </div>
         </div>
       </div>
